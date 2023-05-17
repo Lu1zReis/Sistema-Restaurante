@@ -1,0 +1,52 @@
+* {
+	font: 1rem 'Fira Sans', sans-serif;
+}
+
+.cabecalho {
+	text-align: center;
+	padding: 10px;
+
+}
+
+.principal {
+	padding: 5px;
+	max-width: 100%;
+}
+
+.principal-busca {
+	text-align: center;
+	padding: 20px;
+}
+
+.principal-items {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+.principal-items-prod {
+	display: flex;
+	padding: 10px;
+}
+
+.principal-items-detalhes {
+	margin-top: 30px;
+	border-bottom: 2px solid black;
+	max-width: 50%;
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+.principal-items-prod-detalhes-nom {
+	max-width: 30%;
+}
+
+fieldset {
+	height: 100px;
+	max-width: 25%;
+	border: 2px solid grey;
+}
+
+#qnt-item {
+	width: 40%;
+}
