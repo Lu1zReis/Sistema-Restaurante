@@ -1,5 +1,6 @@
 * {
 	font-family: cursive;
+	text-decoration: none;
 }
 
 .cabecalho {
@@ -27,6 +28,7 @@
     flex-direction: column;
     gap: 15px;
     margin: 15px;
+    color: white;
   }
   
   .cards .red {
@@ -78,8 +80,8 @@
 	justify-content: space-evenly;
 	flex-wrap: wrap;
     background-color: #a8a8a8;
-    border-radius: 10%;
-    width: 80%;
+    border-radius: 5%;
+    width: 100%;
     align-items: center;
 }
 .principal-items-prod {
@@ -101,7 +103,7 @@
 }
 
 .principal-items-prod-detalhes-nom {
-	max-width: 30%;
+	max-width: 20%;
 }
 
 fieldset {

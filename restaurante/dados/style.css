@@ -1,0 +1,118 @@
+* {
+	font-family: cursive;
+	text-decoration: none;
+}
+
+.cabecalho {
+	text-align: center;
+	padding: 10px;
+
+}
+
+.principal {
+	padding: 5px;
+	max-width: 100%;
+}
+
+.principal-busca {
+	text-align: center;
+	padding: 20px;
+}
+
+.container {
+	display: flex;
+	margin: 1%;
+}
+
+.lista {
+	margin: 1%;
+	max-width: 80%;
+	border: 2px solid black;
+}
+
+.lista-elemento {
+	display: flex;
+	justify-content: space-between;
+	margin: 40px;
+}
+
+.numero {
+	padding: 10px;
+}
+
+.lista-linha {
+	border-bottom: 2px solid black;
+
+}
+
+.lista-detalhes {
+	display: flex;
+	justify-content: left;
+
+}
+
+.lista-detalhes-pedido {
+	background-color: orange;
+	padding: 5px;
+	margin: 10px;
+	border-radius: 10px;
+}
+
+.lista-detalhes-pagamento {
+	background-color: orange;
+	padding: 5px;
+	margin: 10px;
+	border-radius: 10px;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px;
+    color: white;
+  }
+  
+  .cards .red {
+    background-color: #f43f5e;
+  }
+  
+  .cards .blue {
+    background-color: #3b82f6;
+  }
+  
+  .cards .green {
+    background-color: #22c55e;
+  }
+  
+  .cards .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100px;
+    width: 250px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 400ms;
+  }
+  
+  .cards .card p.tip {
+    font-size: 1em;
+    font-weight: 700;
+  }
+  
+  .cards .card p.second-text {
+    font-size: .7em;
+  }
+  
+  .cards .card:hover {
+    transform: scale(1.1, 1.1);
+  }
+  
+  .cards:hover > .card:not(:hover) {
+    filter: blur(10px);
+    transform: scale(0.9, 0.9);
+  }
