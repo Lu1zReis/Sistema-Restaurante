@@ -65,7 +65,7 @@ class cardapioDao {
     }
 
     public function len () {
-        $QUERY = "SELECT * FROM cardapio";
+        $sql = "SELECT * FROM cardapio";
         $stmt = Conexão::getConn()->prepare($sql);
         $stmt->execute();
 

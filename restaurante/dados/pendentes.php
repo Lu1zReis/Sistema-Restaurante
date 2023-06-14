@@ -9,6 +9,11 @@
 
 	session_start();
 
+	if (isset($_SESSION['msg'])) {
+		echo $_SESSION['msg'];
+		unset($_SESSION['msg']);
+	}
+
 	if(isset($_GET['btn-continuar'])) {
 		if(empty($_SESSION['carrinho'])) {
 			$_SESSION['msg'] = "<script>alert('Adicione algo ao carrinho antes de continuar!');</script>";
@@ -34,13 +39,22 @@
 			$pedido->setHora($hora);
 			$pedido->setEntregue("Preparando Pedido!");
 			$pedido->setPago("Pagamento Pendente!");
-			// criando um novo pedido
-			$pedidoDao->create($pedido);
+
+			// caso o usuario esteja só editando um pedido, em vez de criarmos atualizamos 
+			if (isset($_SESSION['edicao-aux'])) {
+				$pedido->setId((int)$_SESSION['edicao-aux']);
+				if ($pedidoDao->update($pedido)) echo "<script>alert('Pedido Atualizado!');</script>";
+				else echo "<script>alert('Não Foi Possível Atualizar os Dados do Pedido!');</script>";
+			}
+			// criando um novo pedido    
+			else {
+				if ($pedidoDao->create($pedido)) echo "<script>alert('Novo Pedido Adicionado!');</script>";
+				else echo "<script>alert('Não Foi Possível Adicionar o Novo Pedido!');</script>";
+			}
 			// apagando os dados da sessao
 			session_destroy();
-			// redirecionando
-			$_SESSION['adicionado'] = "<script>alert('Novo Pedido Adicionado!');</script>";
-			header('Location: ../index.php');
+			
+			
 		}
 	}
 
@@ -145,7 +159,7 @@
 										Editar
 									</div>
 								</a>
-								<a href="">
+								<a href="action.php?del=<?php echo $p['id']; ?>">
 									<div class="lista-edit-del">
 										Deletar
 									</div>

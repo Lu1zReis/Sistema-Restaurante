@@ -67,7 +67,7 @@ class PedidoDao {
     }
 
     public function len () {
-        $QUERY = "SELECT * FROM pedidos";
+        $sql = "SELECT * FROM pedidos";
         $stmt = Conexão::getConn()->prepare($sql);
         $stmt->execute();
 
