@@ -90,7 +90,7 @@
 	  flex-wrap: wrap;
     background-color: #a8a8a8;
     border-radius: 5%;
-    max-width: 90%;
+    max-width: 100%;
     text-align: center;
 }
 .principal-items-prod {
@@ -99,67 +99,89 @@
   align-items: center;
   max-width: 40%;
 }
-
-.principal-items-detalhes {
-	margin-top: 30px;
-	border-bottom: 2px solid black;
-	max-width: 40%;
-	display: flex;
-	justify-content: space-evenly;
-	flex-wrap: wrap;
-}
-
-.principal-items-prod-cod {
-    margin: 1%;
-}
-
-.principal-items-prod-detalhes-nom {
-	max-width: 100%;
-  text-align: left;
-}
-
-.principal-items-prod-detalhes-preco {
-  max-width: 100%;
-  text-align: left;
-}
-
-.nome {
-  width: 100%;
-}
-
-fieldset {
-	height: 90px;
-	max-width: 20%;
-	border: 4px solid grey;
-}
-
-.switch {
-  color: white;
-  background-color: #7b7d6e;
-  width: 50%;
+.card-prod {
+  width: 190px;
+  height: 254px;
+  padding: .8em;
+  background: #f5f5f5;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+ }
+ 
+ .card-prod-img {
+  background-color: #ffcaa6;
   height: 40%;
-  border: 2px solid black;
-  border-radius: 2px;
-}
+  width: 100%;
+  border-radius: .5rem;
+  transition: .3s ease;
+ }
+ .img {
+  width: 100%;
+  height: 100%;
+ }
+ .card-prod-info {
+  padding-top: 10%;
+ }
+ 
+ svg {
+  width: 20px;
+  height: 20px;
+ }
+ 
+ .card-prod-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+ }
+ 
+ /*Text*/
+ .text-prod-title {
+  font-weight: 900;
+  font-size: 1.2em;
+  line-height: 1.5;
+ }
+ 
+ .text-prod-body {
+  font-size: .9em;
+  padding-bottom: 10px;
+ }
+ 
+ /*Button*/
+ .card-prod-button {
+  border: 1px solid #252525;
+  display: flex;
+  padding: .3em;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: .3s ease-in-out;
+ }
+ 
+ /*Hover*/
+ .card-prod-img:hover {
+  transform: translateY(-25%);
+  box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
+ }
+ 
+ .card-prod-button:hover {
+  border: 1px solid #ffcaa6;
+  background-color: #ffcaa6;
+ }
+ 
 
 .comprados {
+  display: flex;
+  flex-direction: column;
   padding: 10px;
-  width: 35%;
+  max-width: 35%;
   margin: 15px;
-  border: 2px solid black;
 }
 
 .comprados-items-nome {
   max-width: 80%;
 }
 
-.comprados-items-valor {
-  padding-left: 40px;
-}
-
-.comprados-items-qnt {
-  padding-left: 40px;
-}
 
 .c {
   background-color: #2a1919;

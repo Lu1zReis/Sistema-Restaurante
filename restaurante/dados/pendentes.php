@@ -58,8 +58,57 @@
 		}
 	}
 
-?>
+	if (isset($_GET['entregue'])) {
+		$msg = "";
+		foreach ($pedidoDao->read() as $p) {
+			if ($_GET['entregue'] == $p['id']) {
+				if ($p['entregue'] != 'Pedido Entregue!') {
+					$pedido->setEntregue('Pedido Entregue!');
+					$msg = "<script>alert('Pedido foi entregue!');</script>";
+				}
+				else {
+					$pedido->setEntregue("Preparando Pedido!");
+					$msg = "<script>alert('Preparando Pedido!');</script>"; 
+				} 
+				$pedido->setNome($p['nome']);
+				$pedido->setConta($p['conta']);
+				$pedido->setHora($p['hora']);
+				$pedido->setPago($p['pago']);
+				$pedido->setId($p['id']);
+			}
+		}
+		if ($pedidoDao->update($pedido)) {
+			echo $msg;
+			echo "<script>window.history.pushState('', '', '/Sistema-Restaurante/restaurante/dados/pendentes.php');</script>";
+		}
+	}
 
+	if (isset($_GET['pago'])) {
+		$msg = "";
+		foreach ($pedidoDao->read() as $p) {
+			if ($_GET['pago'] == $p['id']) {
+				$pedido->setEntregue($p['entregue']);
+				$pedido->setNome($p['nome']);
+				$pedido->setConta($p['conta']);
+				$pedido->setHora($p['hora']);
+				if ($p['pago'] != "Pedido Pago!") {
+					$pedido->setPago('Pedido Pago!');
+					$msg = "<script>alert('Pedido foi pago!');</script>";
+				}
+				else {
+					$pedido->setPago('Pagamento Pendente!');
+					$msg = "<script>alert('Pagamento pendente!');</script>";
+				}
+				$pedido->setId($p['id']);
+			}
+		}
+		if ($pedidoDao->update($pedido)) {
+			echo $msg;
+			echo "<script>window.history.pushState('', '', '/Sistema-Restaurante/restaurante/dados/pendentes.php');</script>";
+		}
+	}
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -67,6 +116,60 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pendentes</title>
+	<style>
+		<?php
+		/*
+		arrumando a cor para os pedidos ficarem com um detalhe de se não foi entregue ou pago laranja
+		caso tenha sido tudo feito, o pedido irá ficar verde
+		*/
+		$cont = 1;
+		foreach ($pedidoDao->read() as $p) {
+			if ($p['pago'] == 'Pedido Pago!') {
+		?>
+				.lista-detalhes-pagamento-<?php echo $cont; ?> {
+					color: white;
+					background-color: green;
+					padding: 5px;
+					margin: 10px;
+					border-radius: 10px;
+				}
+		<?php
+			} else {
+		?>
+				.lista-detalhes-pagamento-<?php echo $cont; ?> {
+					color: white;
+					background-color: orange;
+					padding: 5px;
+					margin: 10px;
+					border-radius: 10px;
+				}
+		<?php
+			}
+			if ($p['entregue'] == 'Pedido Entregue!') {
+		?>
+				.lista-detalhes-pedido-<?php echo $cont; ?> {
+					color: white;
+					background-color: green;
+					padding: 5px;
+					margin: 10px;
+					border-radius: 10px;	
+				}
+		<?php
+			} else {
+		?>
+				.lista-detalhes-pedido-<?php echo $cont; ?> {
+					color: white;
+					background-color: orange;
+					padding: 5px;
+					margin: 10px;
+					border-radius: 10px;	
+				}
+		<?php
+			}
+		$cont++;
+		}
+		?>
+	</style>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body onload="time()">
@@ -74,13 +177,20 @@
 		<div class="cabecalho-nome">Pedidos</div>
         <div class="horario"></div>
         <script>
+            function formata(t) {
+                if (t > 9) {
+                    return t
+                } else {
+                    return "0"+t;
+                }
+            }
             function time()
             {
                 today=new Date();
                 h=today.getHours();
                 m=today.getMinutes();
                 s=today.getSeconds();
-                document.querySelector(".horario").innerHTML=h+":"+m+":"+s;
+                document.querySelector(".horario").innerHTML=formata(h)+":"+formata(m)+":"+formata(s);
                 setTimeout('time()',500);
             }
         </script>
@@ -104,8 +214,8 @@
 					</div>
 				</a>
                 <div class="card green">
-                    <p class="tip">Hover me</p>
-                    <p class="second-text">Lorem Ipsum</p>
+                    <p class="tip">Quantidade de Pedidos</p>
+                    <p class="second-text"><?php echo $cont-1; ?></p>
                 </div>
             </div>
 			<div class="organizando">
@@ -136,16 +246,20 @@
 								?>
 								</div>
 								<div class="lista-detalhes">
-									<div class="lista-detalhes-pedido">
-									<?php	
-										echo $p['entregue'];
-									?>
-									</div>
-									<div class="lista-detalhes-pagamento">
-									<?php	
-										echo $p['pago'];
-									?>
-									</div>
+									<a href="?entregue=<?php echo $p['id']; ?>">
+										<div class="lista-detalhes-pedido-<?php echo $contagem; ?>">
+										<?php	
+											echo $p['entregue'];
+										?>
+										</div>
+									</a>
+									<a href="?pago=<?php echo $p['id']; ?>">
+										<div class="lista-detalhes-pagamento-<?php echo $contagem; ?>">
+										<?php	
+											echo $p['pago'];
+										?>
+										</div>
+									</a>
 									<div class="preco">
 									<?php	
 										echo $p['conta'];
@@ -154,7 +268,7 @@
 								</div>
 							</div>
 							<div class="lista-edit">
-								<a href="action.php?edit=<?php echo $p['id']; ?>">	
+								<a href="action.php?edit=<?php echo $p['id']; ?>" >	
 									<div class="lista-edit-edit">
 										Editar
 									</div>
@@ -173,7 +287,6 @@
 				?>
 			</div>
     	</div>
-
 	</main>
 </body>
 </html>

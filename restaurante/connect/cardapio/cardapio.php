@@ -1,7 +1,7 @@
 <?php
 namespace conn;
 class Cardapio {
-    private $id, $cod, $nome, $desc, $valor;
+    private $id, $cod, $nome, $desc, $valor, $img;
 
     public function getId() {
         return $this->id;
@@ -23,6 +23,10 @@ class Cardapio {
         return $this->valor;
     }
 
+    public function getImg() {
+        return $this->img;
+    }
+
     public function setId($i) {
         $this->id = $i;
     }
@@ -37,5 +41,8 @@ class Cardapio {
     }
     public function setValor($v) {
         $this->valor = $v;
+    }
+    public function setImg($i) {
+        $this->img = $i;
     }
 }

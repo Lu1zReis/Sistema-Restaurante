@@ -4,7 +4,7 @@ namespace conn;
 
 class cardapioDao {
     public function create(Cardapio $d) {
-        $sql = 'INSERT INTO cardapio (cod, nome, descricao, valor) VALUES (?, ?, ?, ?)';
+        $sql = 'INSERT INTO cardapio (cod, nome, descricao, valor, imagem) VALUES (?, ?, ?, ?, ?)';
 
         $stmt = Conexão::getConn()->prepare($sql);
 
@@ -12,6 +12,7 @@ class cardapioDao {
         $stmt->bindValue(2, $d->getNome());
         $stmt->bindValue(3, $d->getDesc());
         $stmt->bindValue(4, $d->getValor());
+        $stmt->bindValue(5, $d->getImg());
 
         if($stmt->execute()):
             return true;
@@ -37,7 +38,7 @@ class cardapioDao {
     }
 
     public function update(Cardapio $d) {
-        $sql = 'UPDATE cardapio SET cod = ?, nome = ?, descricao = ?, valor = ? WHERE id = ?';
+        $sql = 'UPDATE cardapio SET cod = ?, nome = ?, descricao = ?, valor = ?, imagem = ? WHERE id = ?';
 
         $stmt = Conexão::getConn()->prepare($sql);
         $stmt->bindValue(1, $d->getCod());
@@ -45,7 +46,8 @@ class cardapioDao {
         $stmt->bindValue(3, $d->getDesc());
         $stmt->bindValue(4, $d->getValor());
         $stmt->bindValue(5, $d->getId());
-
+        $stmt->bindValue(5, $d->getImg());
+        
         if($stmt->execute()):
             return true;
         else:

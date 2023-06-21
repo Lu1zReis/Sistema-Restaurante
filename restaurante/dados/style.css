@@ -134,18 +134,12 @@
 }
 
 .lista-detalhes-pedido {
-	background-color: orange;
+  color: white;
 	padding: 5px;
 	margin: 10px;
 	border-radius: 10px;
 }
 
-.lista-detalhes-pagamento {
-	background-color: orange;
-	padding: 5px;
-	margin: 10px;
-	border-radius: 10px;
-}
 .lista-edit {
   align-items: right;
 }

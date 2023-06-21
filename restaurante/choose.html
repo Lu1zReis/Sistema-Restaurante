@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionamento</title>
+    <style>
+        * {
+            text-decoration: none;
+            font-family: cursive;
+        }
+        .cabecalho {
+        text-align: center;
+        padding: 10px;
+        border-color: 4px solid #000000;
+        background-color: #2a1919;
+        color: white;
+        position: sticky;
+        top: 0;
+        }
+
+        .cabecalho-nome {
+        font-size: 20px;
+        }
+        .escolha {
+            display: block;
+            align-content: center;
+            margin-top: 10%;
+            margin-left: 45%;
+            margin-right: 45%;
+            border: 2px solid black;
+        }
+        .escolha-item-add {
+            font-size:larger;
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            background-color: #58a758;
+            border: 2px solid green;
+        }
+        .escolha-item-edi {
+            font-size:larger;
+            text-align: center;
+            padding: 20px;  
+            color: #fff;
+            background-color: #b25555;
+            border: 2px solid red;
+        }
+        .home {
+            display: block;
+            align-content: center;
+            text-align: center;
+            margin-top: 5%;
+            margin-left: 45%;
+            margin-right: 45%;
+            border: 2px solid black;
+            color: #fff;
+            background-color: #ad7300;
+            border: 2px solid #6f4c16;
+        }
+    </style>
+</head>
+<body onload="time()">
+	<header class="cabecalho">
+		<div class="cabecalho-nome">Redirecionando</div>
+        <div class="horario"></div>
+        <script>
+            function formata(t) {
+                if (t > 9) {
+                    return t
+                } else {
+                    return "0"+t;
+                }
+            }
+            function time()
+            {
+                today=new Date();
+                h=today.getHours();
+                m=today.getMinutes();
+                s=today.getSeconds();
+                document.querySelector(".horario").innerHTML=formata(h)+":"+formata(m)+":"+formata(s);
+                setTimeout('time()',500);
+            }
+        </script>
+	</header>
+    <div class="escolha">
+        <a href="new_edit/novoItem.php">
+            <div class="escolha-item-add">Adicionar Item</div>
+        </a>
+        <a href="new_edit/lista.php">
+            <div class="escolha-item-edi">Editar Item</div>
+        </a>
+    </div>
+    <a href="index.php">
+        <div class="home">Voltar</div>
+    </a>
+    <script>
+        const areaAdd = document.querySelector('.escolha-item-add');
+        const areaEdi = document.querySelector('.escolha-item-edi');
+        const home = document.querySelector('.home');
+
+        areaAdd.addEventListener('mouseenter', (e) => {
+            areaAdd.style.backgroundColor = "green";
+        })
+        areaAdd.addEventListener('mouseleave', (e) => {
+            areaAdd.style.backgroundColor = "#58a758";
+        })
+
+        areaEdi.addEventListener('mouseenter', (e) => {
+            areaEdi.style.backgroundColor = "red";
+        })
+        areaEdi.addEventListener('mouseleave', (e) => {
+            areaEdi.style.backgroundColor = "#b25555";
+        })
+
+        home.addEventListener('mouseenter', (e) => {
+            home.style.backgroundColor = "#6f4c16";
+        })
+        home.addEventListener('mouseleave', (e) => {
+            home.style.backgroundColor = "#ad7300";
+        })
+    </script>
+</body>
+</html>
